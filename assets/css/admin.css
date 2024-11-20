@@ -1,0 +1,228 @@
+/* 管理画面全体のスタイル調整 */
+.job-slider-admin-page {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+/* フォームコンテナ */
+.job-form-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* フォームフィールド */
+.job-form-field {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.job-form-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 14px;
+}
+
+/* 入力フィールド */
+.job-form-field input[type="text"],
+.job-form-field input[type="url"],
+.job-form-field input[type="number"],
+.job-form-field select,
+.job-form-field textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: all 0.2s;
+}
+
+.job-form-field input:focus,
+.job-form-field select:focus,
+.job-form-field textarea:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+  outline: none;
+}
+
+/* ヘルプテキスト */
+.job-form-help {
+  margin-top: 4px;
+  color: #718096;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* スライダー設定画面 */
+.slider-settings-container {
+  margin-top: 20px;
+}
+
+.slider-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* 求人カード選択UI */
+.slider-item-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.slider-item-card:hover {
+  border-color: #4299e1;
+  background: #f7fafc;
+}
+
+.slider-item-card.selected {
+  background: #ebf8ff;
+  border-color: #4299e1;
+}
+
+.slider-item-card label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin: 0;
+  font-weight: normal;
+}
+
+.slider-item-card input[type="checkbox"] {
+  margin: 0;
+}
+
+/* ショートコード表示 */
+.shortcode-info {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f7fafc;
+  border-left: 4px solid #4299e1;
+  border-radius: 4px;
+}
+
+.shortcode-info code {
+  background: #edf2f7;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  margin: 0 4px;
+}
+
+.copy-shortcode {
+  margin-left: 10px !important;
+}
+
+/* エラーメッセージ */
+.no-items {
+  padding: 20px;
+  background: #fff5f5;
+  border-left: 4px solid #f56565;
+  color: #c53030;
+  margin: 20px 0;
+}
+
+/* プレビュー */
+.preview-container {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.preview-title {
+  margin: 0 0 15px;
+  font-size: 14px;
+  color: #4a5568;
+  font-weight: 600;
+}
+
+/* タブレイアウト */
+.admin-tabs {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-tab {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  margin-bottom: -1px;
+  font-weight: 500;
+  color: #4a5568;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-tab.active {
+  background: #fff;
+  border-color: #e2e8f0;
+  border-bottom-color: #fff;
+  color: #4299e1;
+}
+
+/* 保存ボタン */
+.save-button {
+  background: #4299e1;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.save-button:hover {
+  background: #3182ce;
+}
+
+/* レスポンシブ調整 */
+@media screen and (max-width: 782px) {
+  .slider-items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .job-form-field {
+    padding: 10px;
+  }
+}
+
+/* Dashicons統合 */
+.slider-item-card .dashicons {
+  color: #4a5568;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.slider-item-card {
+  animation: fadeIn 0.3s ease-in-out;
+}
