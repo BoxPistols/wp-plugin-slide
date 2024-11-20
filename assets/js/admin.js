@@ -1,38 +1,76 @@
-jQuery(document).ready(function ($) {
-  // スライダー項目カードの選択処理
-  $('.slider-item-card').on('click', function () {
-    $(this).toggleClass('selected');
-    const checkbox = $(this).find('input[type="checkbox"]');
-    checkbox.prop('checked', !checkbox.prop('checked'));
-  });
+/**
+ * 管理画面用JavaScriptファイル
+ * プレビューやコピー機能の制御を行います
+ * 
+ * @package JobSlider
+ * @version 1.0.0
+ */
 
-  // チェックボックスクリック時の伝播を止める
-  $('.slider-item-card input[type="checkbox"]').on('click', function (e) {
-    e.stopPropagation();
-    $(this).closest('.slider-item-card').toggleClass('selected');
+jQuery(document).ready(function ($) {
+  // プレビュー機能
+  $('.preview-jobs').on('click', function () {
+    const $button = $(this);
+    const $loading = $('.preview-loading');
+    const $preview = $('#jobs-preview');
+    const corporationId = $('input[name="corporation_id"]').val();
+
+    if (!corporationId) {
+      alert('Corporation IDを入力してください');
+      return;
+    }
+
+    $button.prop('disabled', true);
+    $loading.show();
+    $preview.html('');
+
+    $.ajax({
+      url: jobSliderAdmin.ajaxUrl,
+      method: 'POST',
+      data: {
+        action: 'preview_jobs',
+        nonce: jobSliderAdmin.nonce,
+        corporation_id: corporationId
+      },
+      success: function (response) {
+        if (response.success) {
+          $preview.html(response.data);
+        } else {
+          $preview.html('<p class="error">エラー: ' + (response.data || '求人データを取得できませんでした') + '</p>');
+        }
+      },
+      error: function (xhr, status, error) {
+        $preview.html('<p class="error">APIリクエストに失敗しました: ' + error + '</p>');
+      },
+      complete: function () {
+        $button.prop('disabled', false);
+        $loading.hide();
+      }
+    });
   });
 
   // ショートコードのコピー機能
   $('.copy-shortcode').on('click', function () {
     const shortcode = $(this).data('shortcode');
     navigator.clipboard.writeText(shortcode).then(function () {
-      alert('ショートコードをコピーしました');
+      const $button = $('.copy-shortcode');
+      $button.text('コピーしました！');
+      setTimeout(function () {
+        $button.text('コピー');
+      }, 2000);
+    }).catch(function (err) {
+      alert('コピーに失敗しました: ' + err);
     });
   });
 
-  // 求人情報フォームのライブプレビュー
-  $('.job-form-field input, .job-form-field select, .job-form-field textarea').on('input', function () {
-    updatePreview();
+  // フォームバリデーション
+  $('form#post').on('submit', function (e) {
+    const corporationId = $('input[name="corporation_id"]').val();
+    const companyName = $('input[name="company_name"]').val();
+
+    if (!corporationId || !companyName) {
+      e.preventDefault();
+      alert('企業名とCorporation IDは必須項目です');
+      return false;
+    }
   });
-
-  function updatePreview() {
-    // プレビューの更新処理
-    const title = $('#title').val();
-    const salary = $('#salary').val();
-    const location = $('#location').val();
-
-    $('.preview-card h3').text(title);
-    $('.preview-salary').text(salary);
-    $('.preview-location').text(location);
-  }
 });
