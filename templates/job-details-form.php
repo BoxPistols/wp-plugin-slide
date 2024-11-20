@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 記事用スライダー選択フォームテンプレート
+ * 求人詳細フォームテンプレート
  * 
  * @package JobSlider
  * @version 1.0.0
@@ -9,47 +9,61 @@
 
 if (!defined('ABSPATH')) exit;
 
-wp_nonce_field('company_slider_nonce', 'company_slider_nonce');
-$selected_slider = get_post_meta($post->ID, '_company_slider_id', true);
-
-// スライダーグループの一覧を取得
-$sliders = get_posts([
-  'post_type' => 'slider_group',
-  'posts_per_page' => -1,
-  'orderby' => 'title',
-  'order' => 'ASC'
-]);
+// 保存されているメタデータを取得
+$meta = get_post_meta($post->ID);
 ?>
 
-<div class="slider-relation-form">
-  <p>
-    <label for="company_slider_id">企業の求人スライダーを選択:</label>
-    <select name="company_slider_id" id="company_slider_id" class="widefat">
-      <option value="">選択してください</option>
-      <?php foreach ($sliders as $slider):
-        $company_name = get_post_meta($slider->ID, '_company_name', true);
-        $display_name = $company_name ? $company_name . ' - ' . $slider->post_title : $slider->post_title;
-      ?>
-        <option value="<?php echo $slider->ID; ?>" <?php selected($selected_slider, $slider->ID); ?>>
-          <?php echo esc_html($display_name); ?>
-        </option>
-      <?php endforeach; ?>
-    </select>
-  </p>
+<div class="job-details-form">
+  <?php wp_nonce_field('job_slider_details', 'job_slider_details_nonce'); ?>
 
-  <?php if (empty($sliders)): ?>
+  <div class="job-slider-field">
+    <label for="corporation_id"><?php _e('企業ID', 'job-slider'); ?></label>
+    <input type="text"
+      id="corporation_id"
+      name="corporation_id"
+      value="<?php echo esc_attr($meta['_corporation_id'][0] ?? ''); ?>"
+      class="widefat">
     <p class="description">
-      <a href="<?php echo admin_url('post-new.php?post_type=slider_group'); ?>">
-        先に求人スライダーを作成してください
-      </a>
+      <?php _e('求人情報を取得する企業IDを入力してください。', 'job-slider'); ?>
     </p>
-  <?php endif; ?>
+  </div>
 
-  <?php if ($selected_slider): ?>
+  <div class="job-slider-field">
+    <label for="display_count"><?php _e('表示件数', 'job-slider'); ?></label>
+    <input type="number"
+      id="display_count"
+      name="display_count"
+      value="<?php echo esc_attr($meta['_display_count'][0] ?? '10'); ?>"
+      min="1"
+      max="100"
+      class="small-text">
     <p class="description">
-      <a href="<?php echo get_edit_post_link($selected_slider); ?>" target="_blank">
-        選択中のスライダーを編集
-      </a>
+      <?php _e('一度に表示する求人の数を設定します。', 'job-slider'); ?>
     </p>
-  <?php endif; ?>
+  </div>
+
+  <div class="job-slider-field">
+    <label>
+      <input type="checkbox"
+        name="enable_pagination"
+        value="1"
+        <?php checked(!empty($meta['_enable_pagination'][0])); ?>>
+      <?php _e('ページネーションを有効にする', 'job-slider'); ?>
+    </label>
+    <p class="description">
+      <?php _e('チェックすると「もっと見る」ボタンが表示されます。', 'job-slider'); ?>
+    </p>
+  </div>
+
+  <div class="job-slider-field">
+    <label for="cache_duration"><?php _e('キャッシュ期間', 'job-slider'); ?></label>
+    <input type="number"
+      id="cache_duration"
+      name="cache_duration"
+      value="<?php echo esc_attr($meta['_cache_duration'][0] ?? '3600'); ?>"
+      class="small-text">
+    <p class="description">
+      <?php _e('APIレスポンスをキャッシュする期間（秒）を設定します。', 'job-slider'); ?>
+    </p>
+  </div>
 </div>

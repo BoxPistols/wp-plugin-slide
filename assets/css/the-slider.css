@@ -1,0 +1,247 @@
+/**
+ * Job Slider フロントエンドスタイル
+ * v1.0.0
+ */
+
+/* スライダーコンテナ */
+.job-slider-container {
+  margin: 2rem 0;
+  padding: 0 40px;
+  position: relative;
+}
+
+/* Swiperカスタマイズ */
+.swiper-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* 求人カード */
+.job-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #eef2f7;
+  margin: 10px;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* カードヘッダー */
+.job-card-header {
+  margin-bottom: 1rem;
+}
+
+.job-title {
+  color: #2d3748;
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* タグ表示 */
+.job-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.job-tag {
+  background: #edf2f7;
+  color: #4a5568;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* メタ情報 */
+.job-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.job-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.job-meta-item i {
+  color: #718096;
+}
+
+/* 給与表示 */
+.job-salary {
+  color: #2d3748;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* 勤務地 */
+.job-location {
+  color: #4a5568;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 職種 */
+.job-type {
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+/* 説明文 */
+.job-description {
+  color: #4a5568;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+/* 詳細リンク */
+.job-link {
+  display: inline-block;
+  background: #4299e1;
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-top: auto;
+}
+
+.job-link:hover {
+  background: #3182ce;
+  text-decoration: none;
+}
+
+/* ナビゲーションボタン */
+.swiper-button-next,
+.swiper-button-prev {
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 1.25rem;
+  color: #4299e1;
+}
+
+/* ページネーション */
+.job-slider-pagination {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.load-more {
+  background: #4299e1;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.load-more:hover {
+  background: #3182ce;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .job-slider-container {
+    padding: 0 20px;
+  }
+
+  .job-card {
+    padding: 1rem;
+  }
+
+  .job-title {
+    font-size: 1.1rem;
+  }
+
+  .job-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+
+  .job-card,
+  .job-link {
+    transition: none;
+  }
+}
+
+/* エラー表示 */
+.job-slider-error {
+  background: #fff5f5;
+  color: #c53030;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+/* ローディング表示 */
+.job-slider-loading {
+  text-align: center;
+  padding: 2rem;
+  color: #4a5568;
+}
+
+.job-slider-loading::after {
+  content: "...";
+  animation: loading-dots 1s infinite;
+}
+
+@keyframes loading-dots {
+
+  0%,
+  20% {
+    content: ".";
+  }
+
+  40%,
+  60% {
+    content: "..";
+  }
+
+  80%,
+  100% {
+    content: "...";
+  }
+}

@@ -1,19 +1,16 @@
 /**
- * 管理画面用スタイルシート
- * プラグイン設定画面のスタイルを定義
- * 
- * @package JobSlider
- * @version 1.0.0
+ * Job Slider 管理画面スタイル
+ * v1.0.0
  */
 
-/* 設定コンテナ */
-.api-settings-container {
+/* 管理画面コンテナ */
+.job-slider-admin {
   max-width: 800px;
   margin: 20px 0;
 }
 
-/* フォーム */
-.api-settings-form {
+/* 設定フォーム */
+.job-slider-settings {
   background: #fff;
   padding: 20px;
   border: 1px solid #e2e8f0;
@@ -21,15 +18,21 @@
   margin-bottom: 20px;
 }
 
-.api-settings-form label {
+/* フォームフィールド */
+.job-slider-field {
+  margin-bottom: 20px;
+}
+
+.job-slider-field label {
   display: block;
   font-weight: 600;
   margin-bottom: 8px;
   color: #2d3748;
 }
 
-.api-settings-form input,
-.api-settings-form select {
+.job-slider-field input[type="text"],
+.job-slider-field input[type="number"],
+.job-slider-field select {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid #e2e8f0;
@@ -37,109 +40,150 @@
   font-size: 14px;
 }
 
-.api-settings-form input:focus,
-.api-settings-form select:focus {
+.job-slider-field input:focus,
+.job-slider-field select:focus {
   border-color: #4299e1;
   box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
   outline: none;
 }
 
-.api-settings-form .description {
+/* 説明文 */
+.job-slider-field .description {
   color: #718096;
   font-size: 13px;
   margin-top: 4px;
-  display: block;
 }
 
 /* プレビューセクション */
-.api-preview-section {
+.job-slider-preview {
   margin: 20px 0;
   padding: 20px;
   background: #f7fafc;
   border-radius: 8px;
 }
 
+.preview-header {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* プレビューボタン */
+.preview-jobs {
+  background: #4299e1;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.preview-jobs:hover {
+  background: #3182ce;
+}
+
+.preview-jobs:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+}
+
+/* ローディング表示 */
 .preview-loading {
-  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: #718096;
 }
 
-.jobs-preview-container {
-  margin-top: 20px;
+.preview-loading .spinner {
+  visibility: visible;
+  float: none;
+  margin: 0;
 }
 
-/* ショートコード情報 */
-.shortcode-info {
-  margin: 20px 0;
-  padding: 15px;
+/* エラーメッセージ */
+.job-slider-error {
+  background: #fff5f5;
+  border-left: 4px solid #f56565;
+  color: #c53030;
+  padding: 12px;
+  margin: 10px 0;
+}
+
+/* 成功メッセージ */
+.job-slider-success {
+  background: #f0fff4;
+  border-left: 4px solid #48bb78;
+  color: #2f855a;
+  padding: 12px;
+  margin: 10px 0;
+}
+
+/* ショートコード表示 */
+.shortcode-display {
   background: #f7fafc;
-  border-left: 4px solid #4299e1;
+  padding: 15px;
   border-radius: 4px;
+  margin: 15px 0;
 }
 
-.shortcode-info code {
+.shortcode-display code {
   background: #edf2f7;
-  padding: 2px 6px;
+  padding: 4px 8px;
   border-radius: 4px;
   font-family: monospace;
 }
 
+/* コピーボタン */
 .copy-shortcode {
-  margin-left: 10px !important;
+  margin-left: 10px;
+  padding: 4px 8px;
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
 }
 
-/* エラーメッセージ */
-.error-message {
-  color: #e53e3e;
-  background: #fff5f5;
-  padding: 10px;
-  border-left: 4px solid #e53e3e;
-  margin: 10px 0;
+.copy-shortcode:hover {
+  background: #3182ce;
 }
 
-/* スライダー関連フォーム */
-.slider-relation-form {
-  margin: 15px 0;
+/* タブレイアウト */
+.job-slider-tabs {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.slider-relation-form select {
-  width: 100%;
-  margin: 8px 0;
+.job-slider-tab {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  margin-bottom: -1px;
+  color: #4a5568;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.job-slider-tab.active {
+  background: #fff;
+  border-color: #e2e8f0;
+  border-bottom-color: #fff;
+  color: #4299e1;
 }
 
 /* レスポンシブ調整 */
 @media screen and (max-width: 782px) {
-  .api-settings-form {
-    padding: 15px;
-  }
-
-  .api-settings-container {
+  .job-slider-admin {
     margin: 10px 0;
   }
-}
 
-/* ダークモード対応 */
-@media (prefers-color-scheme: dark) {
-  .api-settings-form {
-    background: #2d3748;
-    border-color: #4a5568;
-  }
-
-  .api-settings-form label {
-    color: #e2e8f0;
-  }
-
-  .api-settings-form .description {
-    color: #a0aec0;
-  }
-
-  .shortcode-info {
-    background: #2d3748;
-    border-left-color: #4299e1;
-  }
-
-  .shortcode-info code {
-    background: #4a5568;
-    color: #e2e8f0;
+  .job-slider-field input[type="text"],
+  .job-slider-field input[type="number"],
+  .job-slider-field select {
+    font-size: 16px;
   }
 }
